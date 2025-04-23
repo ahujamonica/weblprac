@@ -1,0 +1,87 @@
+Experiment 3: DOM Manipulation with JavaScript
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Styled To-Do</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+      padding: 20px;
+      text-align: center;
+    }
+    input, button {
+      padding: 10px;
+      font-size: 16px;
+      margin: 5px;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+      max-width: 300px;
+      margin: 20px auto;
+    }
+    li {
+      background: #fff;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+    }
+    li button {
+      margin-left: 5px;
+      padding: 5px 10px;
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+
+
+  <h2>📝 To-Do List</h2>
+
+
+  <input id="taskInput" placeholder="Add a task">
+  <button onclick="addTask()">Add</button>
+
+
+  <ul id="taskList"></ul>
+
+
+  <script>
+    function addTask() {
+      let input = document.getElementById("taskInput");
+      let text = input.value.trim();
+      if (text === "") return;
+
+
+      let li = document.createElement("li");
+      li.innerText = text;
+
+
+      let editBtn = document.createElement("button");
+      editBtn.innerText = "Edit";
+      editBtn.onclick = () => {
+        let newText = prompt("Edit task:", li.firstChild.nodeValue);
+        if (newText) li.firstChild.nodeValue = newText;
+      };
+
+
+      let delBtn = document.createElement("button");
+      delBtn.innerText = "Delete";
+      delBtn.onclick = () => li.remove();
+
+
+      li.appendChild(editBtn);
+      li.appendChild(delBtn);
+
+
+      document.getElementById("taskList").appendChild(li);
+      input.value = "";
+    }
+  </script>
+
+
+</body>
+</html>
+
